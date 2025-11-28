@@ -12,7 +12,7 @@ body {
     align-items: center;
 }
 
-.quizapp, .trueFalse, h1, h2 {
+.quizapp, .trueFalse, h1, h2, #nextBtn {
     background: rgb(250, 236, 214);
     color: #074016;
     max-width: 800px;
