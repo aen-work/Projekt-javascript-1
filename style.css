@@ -12,13 +12,22 @@ body {
     align-items: center;
 }
 
-.quizapp, .trueFalse, h1, h2, #nextBtn {
+.quizapp, .trueFalse, h1, h2 {
     background: rgb(250, 236, 214);
     color: #074016;
     max-width: 800px;
     border-radius: 10px;
-    padding:15px;
+    padding:10px;
     margin: 10px;
     /*text-align: center;*/
 
+}
+
+#nextBtn {
+    background: rgb(233, 158, 170);
+    color: #074016;
+    width: 200px;
+    border-radius: 10px;
+    padding:10px;
+    margin-top: 10px;
 }
