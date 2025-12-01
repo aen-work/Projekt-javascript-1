@@ -1,18 +1,37 @@
-/*
-quizQuestion
-true-button
-false-button
-nextBtn
-correct
-*/
+
+
+
 const questionElement = document.getElementById("quizQuestion");
-const trueBtn = document.getElementById("true-button");
-const falseBtn = document.getElementById("false-button");
-const correctBtn = document.getElementById("correct");
 const nextBtn = document.getElementById("nextBtn");
+const answerButton = document.getElementById("answerButton");
+const darkModeBtn = document.getElementById("darkModeBtn");
+const lighModeBtn = document.getElementById("lightModeBtn");
+const body = document.body;
+const quizApp = document.querySelector(".quizapp");
+
+
 
 let currentQuestionIndex = 0;
 let score = 0;
+
+darkModeBtn.addEventListener("click", () => {
+    body.style.backgroundColor = "black";
+    body.style.color = "white";
+    quizApp.style.backgroundColor = "#031d0aff";
+    quizApp.style.color = "rgb(252, 246, 238)";
+    nextBtn.style.backgroundColor ="#000502ff";
+    nextBtn.style.color="white";
+});
+
+lighModeBtn.addEventListener("click", () => {
+    body.style.backgroundColor = "rgb(233, 158, 170)";
+    body.style.color = "white";
+    quizApp.style.backgroundColor = "rgb(250, 236, 214)";
+    quizApp.style.color = "#074016";
+    nextBtn.style.backgroundColor ="rgb(233, 158, 170)";
+    nextBtn.style.color="#074016";
+});
+
 
 const questions = [
 { 
@@ -71,13 +90,34 @@ function showQuestion(){
     let questionNr = currentQuestionIndex + 1;
     questionElement.innerHTML = "Fråga " + questionNr + ". " + currentQuestion.question;
 
-    currentQuestion.answers.forEach(answer => {
+    currentQuestion.answers.array.forEach(a => {
         const button = document.createElement("button");
         button.innerHTML = answer.option;
         button.classList.add("btn");
-        answerButton.appendChild(button);
+        answerButton.appendChild("button");
+        
+    });
+}
 
-    })
+nextBtn.addEventListener("click", handleNextQuestion);
+
+function resetState(){
+    while (answerButton.firstChild){
+        answerButton.removeChild(answerButton.firstChild);
+    }
+}
+
+function handleNextQuestion() {
+    currentQuestionIndex++; 
+
+    if (currentQuestionIndex < questions.length){
+        resetState();
+        showQuestion();
+    } else {
+        showScore();
+        resetState();
+    }
 }
 
 startQuiz();
+
