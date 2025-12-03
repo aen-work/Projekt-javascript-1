@@ -49,7 +49,7 @@ const questions = [
     ]
 },
 {
-    question: "En av huvudkaraktärerna i Wicked heter Elphaba Thropp",
+    question: "Elphaba kan flyga på en kvast",
     answers: [
         {option: "true", correct: true},
         {option: "false", correct: false},
@@ -75,6 +75,45 @@ const questions = [
         {option: "true", correct: false},
         {option: "false", correct: true},
     ]
+},
+{
+    question: "Vilka två skådespelare spelar huvudrollerna i filmen Wicked (2024)?",
+    answers: [
+        {option: "A: Sandra Bullock och Jeff Goldblum", correct: false},
+        {option: "B: Cynthia Erivo och Ariana Grande", correct: true},
+        {option: "C: Michelle Yeoh och Lady Gaga", correct: false},
+        {option: "D: Ariana Grande och Lady Gaga", correct: false},
+    ]
+},
+{
+    question: "Vad är titeln på uppföljaren till Wicked?",
+    answers: [
+        {option: "Wicked: Again", correct: false},
+        {option: "Wicked: Return to Oz", correct: false},
+        {option: "Wicked: For Good", correct: true},
+        {option: "Wicked: The Awakening", correct: false},
+    ]
+},
+{
+    question: "Vem regisserade filmen Wicked (2024)?",
+    answers: [
+        {option: "Steven Spielberg", correct: false},
+        {option: "Jon M. Chu", correct: true},
+        {option: "Christopher Nolan", correct: false},
+        {option: "Tim Burton", correct: false},
+    ]
+
+},
+{
+    question: "Vad heter landet som Wicked utspelar sig i?",
+    answers: [
+        {option: "Oz", correct: true},
+        {option: "Emerald land", correct: false},
+        {option: "Narnia", correct: false},
+        {option: "Panem", correct: false},
+
+    ]
+
 },
 ]
 

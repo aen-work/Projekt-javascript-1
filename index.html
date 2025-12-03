@@ -12,15 +12,22 @@
     <button id="darkModeBtn">Dark Mode</button>
     <button id="lightModeBtn">Light Mode</button>
     <div class="quizapp">
-        <div class="quiz">
-            <h2>Quiz - filmen Wicked</h2>
-            <div class="trueFalse">
-                <h3 id="quizQuestion"></h3><br>
+        <h2>Quiz - filmen Wicked</h2>
+            <h3 id="quizQuestion"></h3><br>
+            <div id="answer-buttons" class="hide">
+                <button class="btn">Answer 1</button>
+                <button class="btn">Answer 2</button>
+                <button class="btn">Answer 3</button>
+                <button class="btn">Answer 4</button>
+            </div>
+            <div class="trueFalse" >
+                <div id="answerButton">
                 <label><input type="radio" name="tfquestion" value="true" id="true-button"/> True</label><br/>
                 <label><input type="radio" name="tfquestion" value="false" id="false-button"/> False</label><br/>
-            <button id="nextBtn">Next</button>
-            <div id="answerButton"></div>
+                </div>
             </div>
+            <button id="nextBtn">Next</button>
+        </div>
             
             <!-- <button id="correct">Submit</button>
             
@@ -32,8 +39,6 @@
                 <h3 id="quizQuestion"></h3><br>
             </div>
             -->
-            
-        </div>
     </div>
 </body>
 </html>
