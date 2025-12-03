@@ -115,7 +115,30 @@ const questions = [
     ]
 
 },
+{
+    question: "Vem regisserade filmen Wicked (2024)?",
+    answers: [
+        {option: "Steven Spielberg", correct: false},
+        {option: "Jon M. Chu", correct: true},
+        {option: "Christopher Nolan", correct: false},
+        {option: "Tim Burton", correct: false},
+    ]
+
+},
+{
+    question: "Vad heter landet som Wicked utspelar sig i?",
+    answers: [
+        {option: "Oz", correct: true},
+        {option: "Emerald land", correct: false},
+        {option: "Narnia", correct: false},
+        {option: "Panem", correct: false},
+    ]
+}
 ]
+
+//Spara alla rätta svar i en array som sedan jämförs med array answers
+correctAnswers = [];
+
 
 function startQuiz(){
     currentQuestionIndex = 0;
@@ -129,10 +152,11 @@ function showQuestion(){
     let questionNr = currentQuestionIndex + 1;
     questionElement.innerHTML = "Fråga " + questionNr + ". " + currentQuestion.question;
 
+    if (questionNr <= 6 ) {
 
     currentQuestion.answers.forEach(answer => {
         const label = document.createElement("label");
-        label.style.display = "block"; // radbrytning
+        label.style.display = "block";
 
         const radio = document.createElement("input");
         radio.type = "radio";
@@ -144,6 +168,23 @@ function showQuestion(){
 
         answerButton.appendChild(label);
     });
+} else {
+    currentQuestion.answers.forEach(answer => {
+    const label = document.createElement("label");
+    label.style.display = "block";
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.name = "answerOption"; 
+    checkbox.value = answer.option;
+
+    label.appendChild(checkbox);
+    label.appendChild(document.createTextNode(" " + answer.option));
+
+    answerButton.appendChild(label);
+});
+
+}
 }
 
 nextBtn.addEventListener("click", handleNextQuestion);
