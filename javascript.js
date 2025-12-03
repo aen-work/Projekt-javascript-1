@@ -129,12 +129,20 @@ function showQuestion(){
     let questionNr = currentQuestionIndex + 1;
     questionElement.innerHTML = "Fråga " + questionNr + ". " + currentQuestion.question;
 
-    currentQuestion.answers.array.forEach(a => {
-        const button = document.createElement("button");
-        button.innerHTML = answer.option;
-        button.classList.add("btn");
-        answerButton.appendChild("button");
-        
+
+    currentQuestion.answers.forEach(answer => {
+        const label = document.createElement("label");
+        label.style.display = "block"; // radbrytning
+
+        const radio = document.createElement("input");
+        radio.type = "radio";
+        radio.name = "answerOption";
+        radio.value = answer.option;
+
+        label.appendChild(radio);
+        label.appendChild(document.createTextNode(" " + answer.option));
+
+        answerButton.appendChild(label);
     });
 }
 
