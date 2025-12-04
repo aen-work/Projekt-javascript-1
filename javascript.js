@@ -207,6 +207,12 @@ function handleNextQuestion() {
         .filter(a => a.correct === true)
         .map(a => a.option);
 
+    
+    function arraysEqual(a, b) {
+    if (a.length !== b.length) return false;
+    return a.every((value, index) => value === b[index]);
+}
+
     if (arraysEqual(selected, correct)) {
     console.log("Match!");
     score++;
@@ -220,16 +226,16 @@ function handleNextQuestion() {
     } else {
         resetState();
         if (score < 6) {
-        questionElement.innerHTML = "Quiz klart! Du fick underkänt " + score + " rätt av " + questions.length;
+        questionElement.innerHTML = "Ditt resultat är här! Du fick underkänt, jag är mycket besviken, .  " + score + " rätt av " + questions.length + ".";
         quizApp.style.backgroundColor = "red";
-        quizApp.style.color ="grey";
+        quizApp.style.color ="white";
         }else if (score >=6 && score <=9) {
-            questionElement.innerHTML = "Quiz klart! Du fick godkänt, men bättre kan du! " + score + " rätt av " + questions.length;
+            questionElement.innerHTML = "Ditt resultat är här! Du fick godkänt, men bättre kan du! " + score + " rätt av " + questions.length + ".";
             quizApp.style.backgroundColor = "Yellow";
-            quizApp.style.color ="grey";
-        } else { questionElement.innerHTML = "Quiz klart! Du fick godkänt " + score + " rätt av " + questions.length;
+            quizApp.style.color ="black";
+        } else { questionElement.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             quizApp.style.backgroundColor = "green";
-            quizApp.style.color ="grey";
+            quizApp.style.color ="White";
 
         }
     }
