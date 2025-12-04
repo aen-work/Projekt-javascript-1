@@ -1,6 +1,3 @@
-
-
-
 const questionElement = document.getElementById("quizQuestion");
 const nextBtn = document.getElementById("nextBtn");
 const answerButton = document.getElementById("answerButton");
@@ -8,7 +5,6 @@ const darkModeBtn = document.getElementById("darkModeBtn");
 const lightModeBtn = document.getElementById("lightModeBtn");
 const body = document.body;
 const quizApp = document.querySelector(".quizapp");
-
 
 
 let currentQuestionIndex = 0;
@@ -136,10 +132,6 @@ const questions = [
 }
 ]
 
-//Spara alla rätta svar i en array som sedan jämförs med array answers
-let correctAnswers = [];
-
-
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
@@ -163,25 +155,20 @@ function showQuestion(){
         radio.type = "radio";
         radio.name = "answerOption";
         radio.value = answer.option;
-
         label.appendChild(radio);
         label.appendChild(document.createTextNode(" " + answer.option));
-
         answerButton.appendChild(label);
     });
 } else {
     currentQuestion.answers.forEach(answer => {
     const label = document.createElement("label");
     label.style.display = "block";
-
     const checkbox = document.createElement("input");
     checkbox.type = "checkbox";
     checkbox.name = "answerOption"; 
     checkbox.value = answer.option;
-
     label.appendChild(checkbox);
     label.appendChild(document.createTextNode(" " + answer.option));
-
     answerButton.appendChild(label);
 });
 
@@ -196,8 +183,6 @@ function resetState(){
     }
 }
 
-
-
 function handleNextQuestion() {
  
     const selected = Array.from(document.querySelectorAll("input[name='answerOption']:checked"),
@@ -211,7 +196,7 @@ function handleNextQuestion() {
     function arraysEqual(a, b) {
     if (a.length !== b.length) return false;
     return a.every((value, index) => value === b[index]);
-}
+    }
 
     if (arraysEqual(selected, correct)) {
     console.log("Match!");
@@ -236,10 +221,8 @@ function handleNextQuestion() {
         } else { questionElement.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             quizApp.style.backgroundColor = "green";
             quizApp.style.color ="White";
-
         }
     }
 }
-
 startQuiz();
 
