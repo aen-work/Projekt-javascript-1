@@ -5,7 +5,7 @@ const questionElement = document.getElementById("quizQuestion");
 const nextBtn = document.getElementById("nextBtn");
 const answerButton = document.getElementById("answerButton");
 const darkModeBtn = document.getElementById("darkModeBtn");
-const lighModeBtn = document.getElementById("lightModeBtn");
+const lightModeBtn = document.getElementById("lightModeBtn");
 const body = document.body;
 const quizApp = document.querySelector(".quizapp");
 
@@ -23,7 +23,7 @@ darkModeBtn.addEventListener("click", () => {
     nextBtn.style.color="white";
 });
 
-lighModeBtn.addEventListener("click", () => {
+lightModeBtn.addEventListener("click", () => {
     body.style.backgroundColor = "rgb(233, 158, 170)";
     body.style.color = "white";
     quizApp.style.backgroundColor = "rgb(250, 236, 214)";
@@ -116,34 +116,35 @@ const questions = [
 
 },
 {
-    question: "Vem regisserade filmen Wicked (2024)?",
+    question: "Vem är rektor på Shiz University?",
     answers: [
-        {option: "Steven Spielberg", correct: false},
-        {option: "Jon M. Chu", correct: true},
-        {option: "Christopher Nolan", correct: false},
-        {option: "Tim Burton", correct: false},
+        {option: "The Wizard", correct: false},
+        {option: "Madame Morrible", correct: true},
+        {option: "Minerva McGonagall", correct: false},
+        {option: "President Snow", correct: false},
     ]
 
 },
 {
-    question: "Vad heter landet som Wicked utspelar sig i?",
+    question: "Vem gav Elphaba hennes svarta hatt?",
     answers: [
-        {option: "Oz", correct: true},
-        {option: "Emerald land", correct: false},
-        {option: "Narnia", correct: false},
-        {option: "Panem", correct: false},
+        {option: "Glinda", correct: true},
+        {option: "Prins Fiyero", correct: false},
+        {option: "Nessa", correct: false},
+        {option: "The Wizard of Oz", correct: false},
     ]
 }
 ]
 
 //Spara alla rätta svar i en array som sedan jämförs med array answers
-correctAnswers = [];
+let correctAnswers = [];
 
 
 function startQuiz(){
     currentQuestionIndex = 0;
     score = 0;
     nextBtn.innerHTML ="Next";
+    resetState();
     showQuestion();
 }
 
@@ -195,15 +196,42 @@ function resetState(){
     }
 }
 
+
+
 function handleNextQuestion() {
-    currentQuestionIndex++; 
+ 
+    const selected = Array.from(document.querySelectorAll("input[name='answerOption']:checked"),
+    input => input.value);
+
+    const correct = questions[currentQuestionIndex].answers
+        .filter(a => a.correct === true)
+        .map(a => a.option);
+
+    if (arraysEqual(selected, correct)) {
+    console.log("Match!");
+    score++;
+    }
+
+    currentQuestionIndex++;
 
     if (currentQuestionIndex < questions.length){
         resetState();
         showQuestion();
     } else {
-        showScore();
         resetState();
+        if (score < 6) {
+        questionElement.innerHTML = "Quiz klart! Du fick underkänt " + score + " rätt av " + questions.length;
+        quizApp.style.backgroundColor = "red";
+        quizApp.style.color ="grey";
+        }else if (score >=6 && score <=9) {
+            questionElement.innerHTML = "Quiz klart! Du fick godkänt, men bättre kan du! " + score + " rätt av " + questions.length;
+            quizApp.style.backgroundColor = "Yellow";
+            quizApp.style.color ="grey";
+        } else { questionElement.innerHTML = "Quiz klart! Du fick godkänt " + score + " rätt av " + questions.length;
+            quizApp.style.backgroundColor = "green";
+            quizApp.style.color ="grey";
+
+        }
     }
 }
 
