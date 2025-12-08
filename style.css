@@ -21,7 +21,6 @@ h1, h2 {
     padding:10px;
     margin: 10px;
     width: 800px;
-    height: 350px;
     max-width: 80%;
     border-radius: 10px;
     box-shadow: 0 0 6px 2px;
@@ -39,11 +38,8 @@ h1, h2 {
     box-shadow: 0 0 6px 2px;
 }
 
-.btn {
-    background: blue;
-    padding: 40px, 10px;
-    display: flex;
-
+#answers {
+    margin-bottom: 20px;
 }
 
 #nextBtn {
