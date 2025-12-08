@@ -6,7 +6,6 @@ const lightModeBtn = document.getElementById("lightModeBtn");
 const body = document.body;
 const quizApp = document.querySelector(".quizapp");
 
-
 let currentQuestionIndex = 0;
 let score = 0;
 
@@ -133,8 +132,6 @@ const questions = [
 ]
 
 function startQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
     nextBtn.innerHTML ="Next";
     resetState();
     showQuestion();
@@ -177,6 +174,8 @@ function showQuestion(){
 
 nextBtn.addEventListener("click", handleNextQuestion);
 
+let select = document.querySelector("[name=answerOption]:checked");
+
 function resetState(){
     while (answerButton.firstChild){
         answerButton.removeChild(answerButton.firstChild);
@@ -184,14 +183,51 @@ function resetState(){
 }
 
 function handleNextQuestion() {
- 
-    const selected = Array.from(document.querySelectorAll("input[name='answerOption']:checked"),
-    input => input.value);
+    let selectedAnswers = [];
+    document.querySelectorAll("[name=answerOption]:checked").forEach(checkbox => {
+        selectedAnswers.push(checkbox.value);
+    });
+    console.log(selectedAnswers);
 
-    const correct = questions[currentQuestionIndex].answers
-        .filter(a => a.correct === true)
-        .map(a => a.option);
+    let correctAnswersObjects = [];
+        correctAnswersObjects = questions[currentQuestionIndex].answers.filter(item => {
+        return item.correct===true
 
+    });
+    console.log(correctAnswersObjects);
+
+    let correctAnswers = [];
+    correctAnswersObjects.forEach(item => {
+        correctAnswers.push(item.option);
+    })
+    console.log(correctAnswers)
+
+    //Kolla att längd är likadan - selectedAnswers vs correctAnswers
+
+    if (selectedAnswers.length === correctAnswers.length)
+
+    //Kolla att alla värden som är selected, finns i correctAnswers
+
+
+
+
+
+
+    currentQuestionIndex++;
+
+
+
+
+
+
+
+
+    /* använder array.from() som kallar på alla element som är ibockade i quizet.
+
+    const selected = Array.from(document.querySelectorAll("input[name='answerOption']:checked"),input => input.value);
+    const correct = questions[currentQuestionIndex].answers.filter(a => a.correct === true);
+
+    console.log(correct);
     
     function arraysEqual(a, b) {
     if (a.length !== b.length) return false;
@@ -203,18 +239,21 @@ function handleNextQuestion() {
     score++;
     }
 
-    currentQuestionIndex++;
+    */
+
+    
+    
 
     if (currentQuestionIndex < questions.length){
         resetState();
         showQuestion();
     } else {
         resetState();
-        if (score < 6) {
-        questionElement.innerHTML = "Ditt resultat är här! Du fick underkänt, jag är mycket besviken, .  " + score + " rätt av " + questions.length + ".";
+        if (score < (currentQuestionIndex * 0.5)){
+        questionElement.innerHTML = "Ditt resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
         quizApp.style.backgroundColor = "red";
         quizApp.style.color ="white";
-        }else if (score >=6 && score <=9) {
+        }else if (score >= currentQuestionIndex * 0.5 && score <= currentQuestionIndex * 0.75) {
             questionElement.innerHTML = "Ditt resultat är här! Du fick godkänt, men bättre kan du! " + score + " rätt av " + questions.length + ".";
             quizApp.style.backgroundColor = "Yellow";
             quizApp.style.color ="black";
@@ -225,4 +264,3 @@ function handleNextQuestion() {
     }
 }
 startQuiz();
-
