@@ -204,14 +204,22 @@ function handleNextQuestion() {
 
     //Kolla att längd är likadan - selectedAnswers vs correctAnswers
 
-    if (selectedAnswers.length === correctAnswers.length)
+/* if (selectedAnswers.length === correctAnswers.length) {
+        console.log("yes");
+    
+    } else alert("Fyll i ett svar!");
 
+*/
     //Kolla att alla värden som är selected, finns i correctAnswers
 
-
-
-
-
+    function compare(selectedAnswers, correctAnswers) {
+    if (selectedAnswers.length === correctAnswers.length)
+        return selectedAnswers.every((element, index) => element === correctAnswers[index]);
+    }
+    if (compare(selectedAnswers, correctAnswers)) {
+            console.log("Rätt svar!");
+            score++;
+    }
 
     currentQuestionIndex++;
 
