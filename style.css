@@ -27,6 +27,18 @@ h1, h2 {
     box-shadow: 0 0 6px 2px;
 }
 
+.quizPoints {
+    background: rgb(250, 236, 214);
+    color: #074016;
+    padding:10px;
+    margin: 10px;
+    width: 200px;
+    height: 100px;
+    max-width: 80%;
+    border-radius: 10px;
+    box-shadow: 0 0 6px 2px;
+}
+
 .btn {
     background: blue;
     padding: 40px, 10px;
