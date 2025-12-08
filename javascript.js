@@ -124,9 +124,27 @@ const questions = [
     question: "Vem gav Elphaba hennes svarta hatt?",
     answers: [
         {option: "Glinda", correct: true},
-        {option: "Prins Fiyero", correct: false},
-        {option: "Nessa", correct: false},
+        {option: "Fiyero", correct: false},
+        {option: "Nessarose", correct: false},
         {option: "The Wizard of Oz", correct: false},
+    ]
+},
+{
+    question: "Vilka av dessa karaktärer finns INTE med i Wicked?",
+    answers: [
+        {option: "Jeanine", correct: true},
+        {option: "Jack", correct: true},
+        {option: "Wonka", correct: true},
+        {option: "Boq", correct: false},
+    ]
+},
+{
+    question: "Välj alla platser som finns med i Wicked",
+    answers: [
+        {option: "Emerald City", correct: true},
+        {option: "Shiz University", correct: true},
+        {option: "Munchkinland", correct: true},
+        {option: "Diagon Alley", correct: false},
     ]
 }
 ]
@@ -142,7 +160,7 @@ function showQuestion(){
     let questionNr = currentQuestionIndex + 1;
     questionElement.innerHTML = "Fråga " + questionNr + ". " + currentQuestion.question;
 
-    if (questionNr <= 6 ) {
+    if (questionNr <= 12 ) {
 
     currentQuestion.answers.forEach(answer => {
         const label = document.createElement("label");
