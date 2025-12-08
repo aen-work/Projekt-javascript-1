@@ -238,6 +238,7 @@ function handleNextQuestion() {
         resetState();
         showQuestion();
     } else {
+        nextBtn.remove();
         resetState();
         if (score < (currentQuestionIndex * 0.5)){
         questionElement.innerHTML = "Ditt resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
