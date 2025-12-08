@@ -6,6 +6,7 @@ const lightModeBtn = document.getElementById("lightModeBtn");
 const body = document.body;
 const quizApp = document.querySelector(".quizapp");
 const pointsCounter = document.getElementById("score");
+const pointsContainer = document.querySelector(".quizPoints");
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -17,6 +18,8 @@ darkModeBtn.addEventListener("click", () => {
     quizApp.style.color = "rgb(252, 246, 238)";
     nextBtn.style.backgroundColor ="#000502ff";
     nextBtn.style.color="white";
+    pointsContainer.style.color="white";
+    pointsContainer.style.backgroundColor="black";
 });
 
 lightModeBtn.addEventListener("click", () => {
@@ -26,8 +29,9 @@ lightModeBtn.addEventListener("click", () => {
     quizApp.style.color = "#074016";
     nextBtn.style.backgroundColor ="rgb(233, 158, 170)";
     nextBtn.style.color="#074016";
+    pointsContainer.style.color="#074016";
+    pointsContainer.style.backgroundColor="rgb(250, 236, 214)";
 });
-
 
 const questions = [
 { 
@@ -193,8 +197,6 @@ function showQuestion(){
 
 nextBtn.addEventListener("click", handleNextQuestion);
 
-let select = document.querySelector("[name=answerOption]:checked");
-
 function resetState(){
     while (answers.firstChild){
         answers.removeChild(answers.firstChild);
@@ -206,20 +208,20 @@ function handleNextQuestion() {
     document.querySelectorAll("[name=answerOption]:checked").forEach(checkbox => {
         selectedAnswers.push(checkbox.value);
     });
-    console.log(selectedAnswers);
+    //console.log(selectedAnswers);
 
     let correctAnswersObjects = [];
         correctAnswersObjects = questions[currentQuestionIndex].answers.filter(item => {
         return item.correct===true
 
     });
-    console.log(correctAnswersObjects);
+    //console.log(correctAnswersObjects);
 
     let correctAnswers = [];
     correctAnswersObjects.forEach(item => {
         correctAnswers.push(item.option);
     })
-    console.log(correctAnswers)
+    //console.log(correctAnswers)
 
     function compare(selectedAnswers, correctAnswers) {
     if (selectedAnswers.length === correctAnswers.length)
@@ -228,8 +230,8 @@ function handleNextQuestion() {
     if (compare(selectedAnswers, correctAnswers)) {
             console.log("Rätt svar!");
             score++;
-    pointsCounter.innerHTML="Rätt svar! Poängställning: " + score;
-    }else { pointsCounter.innerHTML="Fel svar! Poängställning: " + score;
+    pointsCounter.innerHTML="Rätt svar! Antal rätt: " + score;
+    }else { pointsCounter.innerHTML="Fel svar! Antal rätt: " + score;
     };
 
     currentQuestionIndex++;
