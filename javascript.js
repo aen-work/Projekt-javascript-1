@@ -251,20 +251,12 @@ function handleNextQuestion() {
 }
 
 while (currentQuestionIndex === questions.length){
-    nextBtn.innerHTML ="Restart Quiz";
-    nextBtn.addEventListener("click", restartQuiz);
     showFinalResults();
     break;
 }
-
-
-function restartQuiz(){
-    currentQuestionIndex = 0;
-    score = 0;
-    pointsCounter.innerHTML="Antal rätt: " + score;
-    startQuiz();
-}       
+    
 function showFinalResults(){
+        nextBtn.remove();
         const h3 = document.getElementById("quizQuestion");
         h3.innerHTML = "Rätt svar är Emerald City, Shiz University och Munchkinland.";
         if (score < (currentQuestionIndex * 0.5)){
