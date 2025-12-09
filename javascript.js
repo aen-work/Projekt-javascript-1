@@ -230,9 +230,6 @@ function handleNextQuestion() {
     }
     if (compare(selectedAnswers, correctAnswers)) {
             console.log("meddelande 1");
-            
-
-
             score++;
     questionElement.innerHTML = "Du valde: " + correctAnswersObjects.map(item => item.option).join(", ") + ". Rätt svar!";
     pointsCounter.innerHTML="Antal rätt: " + score;
