@@ -37,8 +37,7 @@ h1, h2 {
     border-radius: 10px;
     padding:10px;
 }
-
-
-#nextBtn:hover {
-    background: rgb(247, 210, 216);
+#nextBtn:not(:disabled):hover {
+    background: rgb(236, 178, 188);
+    cursor: pointer;
 }

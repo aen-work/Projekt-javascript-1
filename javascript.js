@@ -20,7 +20,7 @@ darkModeBtn.addEventListener("click", () => {
     nextBtn.style.backgroundColor ="#000502ff";
     nextBtn.style.color="white";
     pointsContainer.style.color="white";
-    pointsContainer.style.backgroundColor="black";
+    pointsContainer.style.backgroundColor="#031d0aff";
 });
 
 lightModeBtn.addEventListener("click", () => {
@@ -114,7 +114,6 @@ const questions = [
         {option: "Panem", correct: false},
 
     ]
-
 },
 {
     question: "Vem är rektor på Shiz University?",
@@ -124,7 +123,6 @@ const questions = [
         {option: "Minerva McGonagall", correct: false},
         {option: "President Snow", correct: false},
     ]
-
 },
 {
     question: "Vem gav Elphaba hennes svarta hatt?",
@@ -171,7 +169,6 @@ function showQuestion(){
     currentQuestion.answers.forEach(answer => {
         const label = document.createElement("label");
         label.style.display = "block";
-
         const radio = document.createElement("input");
         radio.type = "radio";
         radio.name = "answerOption";
@@ -180,20 +177,19 @@ function showQuestion(){
         label.appendChild(document.createTextNode(" " + answer.option));
         answers.appendChild(label);
     });
-} else {
-    currentQuestion.answers.forEach(answer => {
-    const label = document.createElement("label");
-    label.style.display = "block";
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = "answerOption"; 
-    checkbox.value = answer.option;
-    label.appendChild(checkbox);
-    label.appendChild(document.createTextNode(" " + answer.option));
-    answers.appendChild(label);
-});
-
-}
+    } else {
+        currentQuestion.answers.forEach(answer => {
+        const label = document.createElement("label");
+        label.style.display = "block";
+        const checkbox = document.createElement("input");
+        checkbox.type = "checkbox";
+        checkbox.name = "answerOption"; 
+        checkbox.value = answer.option;
+        label.appendChild(checkbox);
+        label.appendChild(document.createTextNode(" " + answer.option));
+        answers.appendChild(label);
+    });
+    }
 }
 
 nextBtn.addEventListener("click", handleNextQuestion);
@@ -209,63 +205,60 @@ function handleNextQuestion() {
     document.querySelectorAll("[name=answerOption]:checked").forEach(checkbox => {
         selectedAnswers.push(checkbox.value);
     });
-    //console.log(selectedAnswers);
-
     let correctAnswersObjects = [];
         correctAnswersObjects = questions[currentQuestionIndex].answers.filter(item => {
         return item.correct===true
 
     });
-    //console.log(correctAnswersObjects);
-
     let correctAnswers = [];
     correctAnswersObjects.forEach(item => {
         correctAnswers.push(item.option);
-    })
-    //console.log(correctAnswers)
-
+    });
     function compare(selectedAnswers, correctAnswers) {
     if (selectedAnswers.length === correctAnswers.length)
         return selectedAnswers.every((element, index) => element === correctAnswers[index]);
     }
+    nextBtn.disabled = true;
     if (compare(selectedAnswers, correctAnswers)) {
-            console.log("meddelande 1");
             score++;
-    questionElement.innerHTML = "Du valde: " + correctAnswersObjects.map(item => item.option).join(", ") + ". Rätt svar!";
-    pointsCounter.innerHTML="Antal rätt: " + score;
-    }else { 
-        questionElement.innerHTML = "Du valde fel, rätt svar är " + correctAnswersObjects.map(item => item.option).join(", ");
-        pointsCounter.innerHTML="Antal rätt: " + score;
-    };
-
+            questionElement.innerHTML = "Du valde: " + correctAnswersObjects.map(item => item.option).join(", ") + ". Rätt svar!";
+            pointsCounter.innerHTML="Antal rätt: " + score;
+            }else { 
+            questionElement.innerHTML = "Du valde fel, rätt svar är " + correctAnswersObjects.map(item => item.option).join(", ");
+            pointsCounter.innerHTML="Antal rätt: " + score;
+            };
     currentQuestionIndex++;
     if (currentQuestionIndex < questions.length){
-        resetState();
+    
         setTimeout(() => {
+        //nextBtn aktiveras efter 2 sekunder och showQuestion också efter 2 sekunder.
+        nextBtn.disabled = false;
         showQuestion()
         }, 2000);
-        resetState();
 }
+resetState();
 
-while (currentQuestionIndex === questions.length){
+
+if (currentQuestionIndex === questions.length){
     showFinalResults();
-    break;
+
 }
     
 function showFinalResults(){
-        nextBtn.remove();
-        const h3 = document.getElementById("quizQuestion");
-        h3.innerHTML = "Rätt svar är Emerald City, Shiz University och Munchkinland.";
+    nextBtn.remove();
+    const h3 = document.getElementById("quizQuestion");
+    h3.innerHTML = "Rätt svar är Emerald City, Shiz University och Munchkinland.";
         if (score < (currentQuestionIndex * 0.5)){
-        const h3 = document.getElementById("quizQuestion");
-        h4.innerHTML = "Ditt slutliga resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
-        h4.style.backgroundColor = "red";
-        h4.style.color ="white";
+            const h3 = document.getElementById("quizQuestion");
+            h4.innerHTML = "Ditt slutliga resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
+            h4.style.backgroundColor = "red";
+            h4.style.color ="white";
         }else if (score >= currentQuestionIndex * 0.5 && score <= currentQuestionIndex * 0.75) {
             h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             h4.style.backgroundColor = "Yellow";
             h4.style.color ="Black";
-        } else { h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
+        } else {
+            h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             h4.style.backgroundColor = "green";
             h4.style.color ="White";
         }
