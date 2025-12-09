@@ -259,15 +259,15 @@ function showFinalResults(){
         if (score < (currentQuestionIndex * 0.5)){
         const h3 = document.getElementById("quizQuestion");
         h4.innerHTML = "Ditt slutliga resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
-        quizApp.style.backgroundColor = "red";
-        quizApp.style.color ="white";
+        h4.style.backgroundColor = "red";
+        h4.style.color ="white";
         }else if (score >= currentQuestionIndex * 0.5 && score <= currentQuestionIndex * 0.75) {
             h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
-            quizApp.style.backgroundColor = "Yellow";
-            quizApp.style.color ="black";
+            h4.style.backgroundColor = "Yellow";
+            h4.style.color ="white";
         } else { h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
-            quizApp.style.backgroundColor = "green";
-            quizApp.style.color ="White";
+            h4.style.backgroundColor = "green";
+            h4.style.color ="White";
         }
 }
 }
