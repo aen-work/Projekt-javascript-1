@@ -7,6 +7,7 @@ const body = document.body;
 const quizApp = document.querySelector(".quizapp");
 const pointsCounter = document.getElementById("score");
 const pointsContainer = document.querySelector(".quizPoints");
+const h4 = document.getElementById("result");
 
 let currentQuestionIndex = 0;
 let score = 0;
@@ -79,10 +80,10 @@ const questions = [
 {
     question: "Vilka två skådespelare spelar huvudrollerna i filmen Wicked (2024)?",
     answers: [
-        {option: "A: Sandra Bullock och Jeff Goldblum", correct: false},
-        {option: "B: Cynthia Erivo och Ariana Grande", correct: true},
-        {option: "C: Michelle Yeoh och Lady Gaga", correct: false},
-        {option: "D: Ariana Grande och Lady Gaga", correct: false},
+        {option: "Sandra Bullock och Jeff Goldblum", correct: false},
+        {option: "Cynthia Erivo och Ariana Grande", correct: true},
+        {option: "Michelle Yeoh och Lady Gaga", correct: false},
+        {option: "Ariana Grande och Lady Gaga", correct: false},
     ]
 },
 {
@@ -151,7 +152,7 @@ const questions = [
         {option: "Munchkinland", correct: true},
         {option: "Diagon Alley", correct: false},
     ]
-}
+},
 ]
 
 function startQuiz(){
@@ -228,32 +229,57 @@ function handleNextQuestion() {
         return selectedAnswers.every((element, index) => element === correctAnswers[index]);
     }
     if (compare(selectedAnswers, correctAnswers)) {
-            console.log("Rätt svar!");
+            console.log("meddelande 1");
+            
+
+
             score++;
-    pointsCounter.innerHTML="Rätt svar! Antal rätt: " + score;
-    }else { pointsCounter.innerHTML="Fel svar! Antal rätt: " + score;
+    questionElement.innerHTML = "Du valde: " + correctAnswersObjects.map(item => item.option).join(", ") + ". Rätt svar!";
+    pointsCounter.innerHTML="Antal rätt: " + score;
+    }else { 
+        questionElement.innerHTML = "Du valde fel, rätt svar är " + correctAnswersObjects.map(item => item.option).join(", ");
+        pointsCounter.innerHTML="Antal rätt: " + score;
     };
 
     currentQuestionIndex++;
-
     if (currentQuestionIndex < questions.length){
         resetState();
-        showQuestion();
-    } else {
-        nextBtn.remove();
+        setTimeout(() => {
+        showQuestion()
+        }, 2000);
         resetState();
+}
+
+while (currentQuestionIndex === questions.length){
+    nextBtn.innerHTML ="Restart Quiz";
+    nextBtn.addEventListener("click", restartQuiz);
+    showFinalResults();
+    break;
+}
+
+
+function restartQuiz(){
+    currentQuestionIndex = 0;
+    score = 0;
+    pointsCounter.innerHTML="Antal rätt: " + score;
+    startQuiz();
+}       
+function showFinalResults(){
+        const h3 = document.getElementById("quizQuestion");
+        h3.innerHTML = "Rätt svar är Emerald City, Shiz University och Munchkinland.";
         if (score < (currentQuestionIndex * 0.5)){
-        questionElement.innerHTML = "Ditt resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
+        const h3 = document.getElementById("quizQuestion");
+        h4.innerHTML = "Ditt slutliga resultat är här! Du fick underkänt, " + score + " rätt av " + questions.length + ".";
         quizApp.style.backgroundColor = "red";
         quizApp.style.color ="white";
         }else if (score >= currentQuestionIndex * 0.5 && score <= currentQuestionIndex * 0.75) {
-            questionElement.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
+            h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             quizApp.style.backgroundColor = "Yellow";
             quizApp.style.color ="black";
-        } else { questionElement.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
+        } else { h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             quizApp.style.backgroundColor = "green";
             quizApp.style.color ="White";
         }
-    }
+}
 }
 startQuiz();
