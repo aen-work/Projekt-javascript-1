@@ -264,7 +264,7 @@ function showFinalResults(){
         }else if (score >= currentQuestionIndex * 0.5 && score <= currentQuestionIndex * 0.75) {
             h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             h4.style.backgroundColor = "Yellow";
-            h4.style.color ="white";
+            h4.style.color ="Black";
         } else { h4.innerHTML = "Ditt resultat är här! Du fick godkänt, " + score + " rätt av " + questions.length + ".";
             h4.style.backgroundColor = "green";
             h4.style.color ="White";
