@@ -153,11 +153,6 @@ const questions = [
 },
 ]
 
-function startQuiz(){
-    nextBtn.innerHTML ="Next";
-    resetState();
-    showQuestion();
-}
 
 function showQuestion(){
     let currentQuestion = questions[currentQuestionIndex];
@@ -264,4 +259,4 @@ function showFinalResults(){
         }
 }
 }
-startQuiz();
+showQuestion();
